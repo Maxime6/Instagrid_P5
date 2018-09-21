@@ -218,20 +218,29 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="5dp-Yc-Fi9">
                                 <rect key="frame" x="45" y="552" width="285" height="85"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpZ-gT-LIJ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpZ-gT-LIJ">
                                         <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="wpZ-gT-LIJ" secondAttribute="height" multiplier="1:1" id="6fX-yU-LDz"/>
                                         </constraints>
                                         <state key="normal" image="Layout 1" backgroundImage="Selected"/>
+                                        <connections>
+                                            <action selector="chooseLayout1" destination="BYZ-38-t0r" eventType="touchUpInside" id="nmw-G1-Kq4"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTF-S4-AV6">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTF-S4-AV6">
                                         <rect key="frame" x="100" y="0.0" width="85" height="85"/>
                                         <state key="normal" image="Layout 2" backgroundImage="Selected"/>
+                                        <connections>
+                                            <action selector="chooseLayout2" destination="BYZ-38-t0r" eventType="touchUpInside" id="zpN-jG-k7H"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bih-UN-XCn">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bih-UN-XCn">
                                         <rect key="frame" x="200" y="0.0" width="85" height="85"/>
                                         <state key="normal" image="Layout 3" backgroundImage="Selected"/>
+                                        <connections>
+                                            <action selector="chooseLayout3" destination="BYZ-38-t0r" eventType="touchUpInside" id="TKN-u8-VMx"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -398,6 +407,11 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outletCollection property="layoutsButton" destination="wpZ-gT-LIJ" collectionClass="NSMutableArray" id="v0i-6u-M8Z"/>
+                        <outletCollection property="layoutsButton" destination="RTF-S4-AV6" collectionClass="NSMutableArray" id="iHW-pb-mnh"/>
+                        <outletCollection property="layoutsButton" destination="Bih-UN-XCn" collectionClass="NSMutableArray" id="RXn-Rl-94h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

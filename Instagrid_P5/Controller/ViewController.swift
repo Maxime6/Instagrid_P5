@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet var layoutsButton: [UIButton]!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +22,40 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func standardLayout() {
+        for layout in layoutsButton {
+            layout.isEnabled = true
+            layout.isHighlighted = false
+        }
+    }
+    
+    
+    @IBAction func chooseLayout1() {
+        standardLayout()
+        
+        layoutsButton[0].isSelected = true
+        layoutsButton[0].isEnabled = false
+        
+    }
+    
+    @IBAction func chooseLayout2() {
+        standardLayout()
+        
+        layoutsButton[1].isSelected = true
+        layoutsButton[1].isEnabled = false
+        
+    }
+    
+    @IBAction func chooseLayout3() {
+        standardLayout()
+        
+        layoutsButton[2].isSelected = true
+        layoutsButton[2].isEnabled = false
+        
+    }
+    
+
 
 
 }
