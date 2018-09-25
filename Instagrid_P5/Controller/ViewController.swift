@@ -11,49 +11,42 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet var layoutsButton: [UIButton]!
+    @IBOutlet weak var topViewLeft: UIView!
+    @IBOutlet weak var bottomViewLeft: UIView!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        layoutSelectedAtLaunch()
     }
     
-    func standardLayout() {
-        for layout in layoutsButton {
-            layout.isEnabled = true
-            layout.isHighlighted = false
+    // The layout selected when launching the app
+    func layoutSelectedAtLaunch() {
+        layoutsButton[1].isSelected = true
+        topViewLeft.isHidden = false
+        bottomViewLeft.isHidden = true
+    }
+
+    // When user selected a layout
+    @IBAction func layoutButtonTaped(_ sender: UIButton) {
+        layoutsButton.forEach { $0.isSelected = false }
+        sender.isSelected = true
+        switch sender.tag {
+        case 0:
+            topViewLeft.isHidden = true
+            bottomViewLeft.isHidden = false
+        case 1:
+            bottomViewLeft.isHidden = true
+            topViewLeft.isHidden = false
+        case 2:
+            topViewLeft.isHidden = false
+            bottomViewLeft.isHidden = false
+        default:
+            break
         }
     }
     
-    
-    @IBAction func chooseLayout1() {
-        standardLayout()
-        
-        layoutsButton[0].isSelected = true
-        layoutsButton[0].isEnabled = false
-        
-    }
-    
-    @IBAction func chooseLayout2() {
-        standardLayout()
-        
-        layoutsButton[1].isSelected = true
-        layoutsButton[1].isEnabled = false
-        
-    }
-    
-    @IBAction func chooseLayout3() {
-        standardLayout()
-        
-        layoutsButton[2].isSelected = true
-        layoutsButton[2].isEnabled = false
-        
-    }
     
 
 

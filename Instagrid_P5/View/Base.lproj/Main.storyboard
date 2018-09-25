@@ -10,9 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Delm-Medium.otf">
-            <string>Delm-Medium</string>
-        </array>
         <array key="ThirstySoftRegular.otf">
             <string>ThirstySoftRegular</string>
         </array>
@@ -188,17 +185,35 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="fXu-em-XlH">
-                                <rect key="frame" x="89" y="97.5" width="197.5" height="58.5"/>
+                                <rect key="frame" x="110.5" y="103" width="154" height="53"/>
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="&lt;{:linearEase;0,182,116,12,22,450,1;10,182,116,12,22,450,0;} Copy" translatesAutoresizingMaskIntoConstraints="NO" id="Nbc-WW-68z">
-                                        <rect key="frame" x="91" y="0.0" width="15" height="10"/>
+                                        <rect key="frame" x="69.5" y="0.0" width="15" height="10"/>
                                         <variation key="heightClass=regular-widthClass=compact" image="&lt;{:linearEase;0,182,116,12,22,450,1;10,182,116,12,22,450,0;}"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe left to share" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pc-x6-Pzy">
-                                        <rect key="frame" x="0.0" y="25" width="197.5" height="33.5"/>
-                                        <fontDescription key="fontDescription" name="Delm-Medium" family="Delm" pointSize="30"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pc-x6-Pzy">
+                                        <rect key="frame" x="0.0" y="25" width="154" height="28"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Swipe up to share">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <font key="NSFont" size="25" name="Delm-Medium"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=compact">
+                                            <attributedString key="attributedText">
+                                                <fragment content="Swipe left to share">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <font key="NSFont" size="25" name="Delm-Medium"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </variation>
                                     </label>
                                 </subviews>
                                 <constraints>
@@ -223,23 +238,26 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="wpZ-gT-LIJ" secondAttribute="height" multiplier="1:1" id="6fX-yU-LDz"/>
                                         </constraints>
-                                        <state key="normal" image="Layout 1" backgroundImage="Selected"/>
+                                        <state key="normal" backgroundImage="Layout 1"/>
+                                        <state key="selected" image="Selected" backgroundImage="Layout 1"/>
                                         <connections>
-                                            <action selector="chooseLayout1" destination="BYZ-38-t0r" eventType="touchUpInside" id="nmw-G1-Kq4"/>
+                                            <action selector="layoutButtonTaped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vwg-Jh-3jZ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTF-S4-AV6">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTF-S4-AV6">
                                         <rect key="frame" x="100" y="0.0" width="85" height="85"/>
-                                        <state key="normal" image="Layout 2" backgroundImage="Selected"/>
+                                        <state key="normal" backgroundImage="Layout 2"/>
+                                        <state key="selected" image="Selected" backgroundImage="Layout 2"/>
                                         <connections>
-                                            <action selector="chooseLayout2" destination="BYZ-38-t0r" eventType="touchUpInside" id="zpN-jG-k7H"/>
+                                            <action selector="layoutButtonTaped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x7g-Xi-Q9h"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bih-UN-XCn">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bih-UN-XCn">
                                         <rect key="frame" x="200" y="0.0" width="85" height="85"/>
-                                        <state key="normal" image="Layout 3" backgroundImage="Selected"/>
+                                        <state key="normal" backgroundImage="Layout 3"/>
+                                        <state key="selected" image="Selected" backgroundImage="Layout 3"/>
                                         <connections>
-                                            <action selector="chooseLayout3" destination="BYZ-38-t0r" eventType="touchUpInside" id="TKN-u8-VMx"/>
+                                            <action selector="layoutButtonTaped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OfI-hW-yZT"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -408,6 +426,8 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="bottomViewLeft" destination="6X6-Oc-2hX" id="4UD-x9-Xmk"/>
+                        <outlet property="topViewLeft" destination="tRV-3b-fyF" id="C8K-wB-YTY"/>
                         <outletCollection property="layoutsButton" destination="wpZ-gT-LIJ" collectionClass="NSMutableArray" id="v0i-6u-M8Z"/>
                         <outletCollection property="layoutsButton" destination="RTF-S4-AV6" collectionClass="NSMutableArray" id="iHW-pb-mnh"/>
                         <outletCollection property="layoutsButton" destination="Bih-UN-XCn" collectionClass="NSMutableArray" id="RXn-Rl-94h"/>
