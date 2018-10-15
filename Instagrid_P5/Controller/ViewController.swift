@@ -8,15 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    let imagePicker = UIImagePickerController()
+    var imageTag: Int?
     
     @IBOutlet var layoutsButton: [UIButton]!
     @IBOutlet weak var topViewLeft: UIView!
     @IBOutlet weak var bottomViewLeft: UIView!
+    @IBOutlet var addPhotoButtons: [UIButton]!
+    @IBOutlet var photoImageViews: [UIImageView]!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        imagePicker.delegate = self
         
         layoutSelectedAtLaunch()
     }
@@ -47,7 +54,32 @@ class ViewController: UIViewController {
         }
     }
     
+    // Choose an image when user tap on a + button
+    @IBAction func chooseImage(_ sender: UIButton) {
+        let tag = sender.tag
+        imageTag = tag
+        
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let selectedImage = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) else { return }
+        guard let tag = imageTag else { return }
+        photoImageViews[tag].image = selectedImage
+        addPhotoButtons[tag].isHidden = true
+        
+        // Tap Gesture
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
 
 
 
