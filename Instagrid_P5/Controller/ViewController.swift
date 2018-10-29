@@ -54,7 +54,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 self.gridView.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
             }) { (_) in
                 self.shareGrid()
-                self.gridView.transform = .identity
             }
         } else {
             
@@ -62,7 +61,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 self.gridView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
             }) { (_) in
                 self.shareGrid()
-                self.gridView.transform = .identity
             }
         }
     }
@@ -72,7 +70,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         guard let image = gridView.snapshot() else { return }
         let imageToShare = image
         let activityController = UIActivityViewController(activityItems: [imageToShare], applicationActivities: nil)
-        self.present(activityController, animated:  true, completion:  nil)
+        self.present(activityController, animated:  true, completion: nil)
         
     }
     
