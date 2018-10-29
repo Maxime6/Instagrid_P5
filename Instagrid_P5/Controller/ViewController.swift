@@ -13,19 +13,73 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     let imagePicker = UIImagePickerController()
     var imageTag: Int?
     
+    var swipeGestureRecognizer: UISwipeGestureRecognizer?
+    
     @IBOutlet var layoutsButton: [UIButton]!
     @IBOutlet weak var topViewLeft: UIView!
     @IBOutlet weak var bottomViewLeft: UIView!
     @IBOutlet var addPhotoButtons: [UIButton]!
     @IBOutlet var photoImageViews: [UIImageView]!
+    @IBOutlet weak var gridView: UIView!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imagePicker.delegate = self
         
         layoutSelectedAtLaunch()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setUpSwipeDirection), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
+        swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(startAnimation))
+        guard let swipeGestureRecognizer = swipeGestureRecognizer else { return }
+        gridView.addGestureRecognizer(swipeGestureRecognizer)
+    }
+    
+    @objc func setUpSwipeDirection() {
+        if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
+            print("Set up swipe left")
+            swipeGestureRecognizer?.direction = .left
+        } else {
+            print("set up swipe up")
+            swipeGestureRecognizer?.direction = .up
+            
+        }
+    }
+    
+    // SwipeGesture Animations
+    @objc func startAnimation() {
+        if swipeGestureRecognizer?.direction == .left {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.gridView.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
+            }) { (_) in
+                self.shareGrid()
+                self.gridView.transform = .identity
+            }
+        } else {
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.gridView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
+            }) { (_) in
+                self.shareGrid()
+                self.gridView.transform = .identity
+            }
+        }
+    }
+    
+    // Share the Image
+    func shareGrid() {
+        guard let image = gridView.snapshot() else { return }
+        let imageToShare = image
+        let activityController = UIActivityViewController(activityItems: [imageToShare], applicationActivities: nil)
+        self.present(activityController, animated:  true, completion:  nil)
+        
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            gridView.backgroundColor = UIColor.red
+        }
     }
     
     // The layout selected when launching the app
@@ -59,10 +113,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let tag = sender.tag
         imageTag = tag
         
+        openPhotoLibrary()
+        
+    }
+    
+    @objc func addNewPhoto(gesture: UITapGestureRecognizer) {
+        imageTag = gesture.view?.tag
+        openPhotoLibrary()
+    }
+    
+    func openPhotoLibrary() {
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -73,6 +136,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         addPhotoButtons[tag].isHidden = true
         
         // Tap Gesture
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addNewPhoto(gesture:)))
+        photoImageViews[tag].addGestureRecognizer(tapGestureRecognizer)
         
         dismiss(animated: true, completion: nil)
     }
@@ -80,8 +145,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
-
+    
+    
 
 }
 

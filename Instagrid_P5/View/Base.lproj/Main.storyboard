@@ -35,7 +35,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRV-3b-fyF">
                                                         <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Na-XZ-IW6">
+                                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Na-XZ-IW6">
                                                                 <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wg7-e2-jp2">
@@ -59,7 +59,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CoC-Xj-wSv">
                                                         <rect key="frame" x="150" y="0.0" width="135" height="135"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pwF-uv-yUd">
+                                                            <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pwF-uv-yUd">
                                                                 <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                                             </imageView>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Nb-3C-Sdy">
@@ -88,7 +88,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6X6-Oc-2hX">
                                                         <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uW5-IS-vkg">
+                                                            <imageView tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uW5-IS-vkg">
                                                                 <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                                             </imageView>
                                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73n-PR-OA1">
@@ -112,7 +112,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CJE-85-6SS">
                                                         <rect key="frame" x="150" y="0.0" width="135" height="135"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vhd-6C-aai">
+                                                            <imageView tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vhd-6C-aai">
                                                                 <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                                             </imageView>
                                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Up1-FR-Yuk">
@@ -439,6 +439,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomViewLeft" destination="6X6-Oc-2hX" id="4UD-x9-Xmk"/>
+                        <outlet property="gridView" destination="gRg-a3-Gmo" id="crU-ae-BOD"/>
                         <outlet property="topViewLeft" destination="tRV-3b-fyF" id="C8K-wB-YTY"/>
                         <outletCollection property="layoutsButton" destination="wpZ-gT-LIJ" collectionClass="NSMutableArray" id="v0i-6u-M8Z"/>
                         <outletCollection property="layoutsButton" destination="RTF-S4-AV6" collectionClass="NSMutableArray" id="iHW-pb-mnh"/>
