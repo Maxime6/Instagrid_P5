@@ -23,16 +23,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //======================
     // MARK: - Properties
     //======================
-    let imagePicker = UIImagePickerController()
-    var imageTag: Int?
-    let gridViewBackgroundColor = [UIColor(red: 43/255, green: 101/255, blue: 148/255, alpha: 1), UIColor.red, UIColor.lightGray, UIColor.purple]
-    var currentColorPosition = 0
-    var swipeGestureRecognizer: UISwipeGestureRecognizer?
+    private let imagePicker = UIImagePickerController()
+    private var imageTag: Int?
+    private let gridViewBackgroundColor = [UIColor(red: 43/255, green: 101/255, blue: 148/255, alpha: 1), UIColor.red, UIColor.lightGray, UIColor.purple, UIColor.darkGray, UIColor.magenta]
+    private var currentColorPosition = 0
+    private var swipeGestureRecognizer: UISwipeGestureRecognizer?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setBehaviors()
+    }
+    
+    // Set behaviors of the app
+    private func setBehaviors() {
         imagePicker.delegate = self
         
         layoutSelectedAtLaunch()
@@ -46,6 +51,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         gridView.backgroundColor = gridViewBackgroundColor[currentColorPosition]
     }
     
+    //======================
+    // MARK: - Swipe and Share Grid
+    //======================
+    
     // Check the swipe direction
     @objc func setUpSwipeDirection() {
         if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
@@ -54,10 +63,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             swipeGestureRecognizer?.direction = .up
         }
     }
-    
-    //======================
-    // MARK: - Swipe and Share Grid
-    //======================
     
     // SwipeGesture Animations
     @objc func startAnimation() {
@@ -77,7 +82,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // Share the Image
-    func shareGrid() {
+    private func shareGrid() {
         guard let image = gridView.snapshot() else { return }
         let imageToShare = image
         let activityController = UIActivityViewController(activityItems: [imageToShare], applicationActivities: nil)
@@ -88,28 +93,37 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // The animations when gridView return to center
-    func animationsReturn() {
+    private func animationsReturn() {
         UIView.animate(withDuration: 0.5) {
             self.gridView.transform = .identity
         }
     }
 
+    //======================
+    // MARK: - ShakeGesture
+    //======================
     
     // Changed background color of gridView
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            let randomNumber = Int.random(in: 0...gridViewBackgroundColor.count - 1)
-            if !(randomNumber == currentColorPosition) {
-                gridView.backgroundColor = gridViewBackgroundColor[randomNumber]
-                currentColorPosition = randomNumber
+            changeGridViewColor()
+        }
+    }
+    
+    // Change the gridView backgroundcolor
+    private func changeGridViewColor() {
+        let randomNumber = Int.random(in: 0...gridViewBackgroundColor.count - 1)
+        
+        if !(randomNumber == currentColorPosition) {
+            gridView.backgroundColor = gridViewBackgroundColor[randomNumber]
+            currentColorPosition = randomNumber
+        } else {
+            if randomNumber == 0 {
+                gridView.backgroundColor = gridViewBackgroundColor[randomNumber + 1]
+                currentColorPosition = randomNumber + 1
             } else {
-                if randomNumber == 0 {
-                    gridView.backgroundColor = gridViewBackgroundColor[randomNumber + 1]
-                    currentColorPosition = randomNumber + 1
-                } else {
-                    gridView.backgroundColor = gridViewBackgroundColor[randomNumber - 1]
-                    currentColorPosition = randomNumber - 1
-                }
+                gridView.backgroundColor = gridViewBackgroundColor[randomNumber - 1]
+                currentColorPosition = randomNumber - 1
             }
         }
     }
@@ -119,7 +133,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //======================
     
     // The layout selected when launching the app
-    func layoutSelectedAtLaunch() {
+    private func layoutSelectedAtLaunch() {
         layoutsButton[1].isSelected = true
         topViewLeft.isHidden = false
         bottomViewLeft.isHidden = true
@@ -159,7 +173,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // Open the photo library
-    func openPhotoLibrary() {
+    private func openPhotoLibrary() {
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)

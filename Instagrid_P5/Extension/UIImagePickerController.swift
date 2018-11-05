@@ -9,10 +9,13 @@
 import UIKit
 
 extension UIImagePickerController {
+    
+    // Authorize ImagePicker rotation
     open override var shouldAutorotate: Bool {
         return true
     }
     
+    // Rotation is done on all orientations
     open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
     }
