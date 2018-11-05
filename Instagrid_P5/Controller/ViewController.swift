@@ -25,7 +25,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //======================
     let imagePicker = UIImagePickerController()
     var imageTag: Int?
-    let gridViewBackgroundColor = [UIColor.red, UIColor.lightGray, UIColor.purple, UIColor.cyan]
+    let gridViewBackgroundColor = [UIColor(red: 43/255, green: 101/255, blue: 148/255, alpha: 1), UIColor.red, UIColor.lightGray, UIColor.purple]
+    var currentColorPosition = 0
     var swipeGestureRecognizer: UISwipeGestureRecognizer?
     
     
@@ -41,6 +42,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(startAnimation))
         guard let swipeGestureRecognizer = swipeGestureRecognizer else { return }
         gridView.addGestureRecognizer(swipeGestureRecognizer)
+        
+        gridView.backgroundColor = gridViewBackgroundColor[currentColorPosition]
     }
     
     // Check the swipe direction
@@ -95,12 +98,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // Changed background color of gridView
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            let currentColor = gridView.backgroundColor
-            var randomColor = gridViewBackgroundColor.randomElement()
-            if randomColor == currentColor {
-                randomColor = gridViewBackgroundColor.randomElement()
+            let randomNumber = Int.random(in: 0...gridViewBackgroundColor.count - 1)
+            if !(randomNumber == currentColorPosition) {
+                gridView.backgroundColor = gridViewBackgroundColor[randomNumber]
+                currentColorPosition = randomNumber
             } else {
-                gridView.backgroundColor = randomColor
+                if randomNumber == 0 {
+                    gridView.backgroundColor = gridViewBackgroundColor[randomNumber + 1]
+                    currentColorPosition = randomNumber + 1
+                } else {
+                    gridView.backgroundColor = gridViewBackgroundColor[randomNumber - 1]
+                    currentColorPosition = randomNumber - 1
+                }
             }
         }
     }
@@ -141,7 +150,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageTag = tag
         
         openPhotoLibrary()
-        
     }
     
     // Select new photo when user tap on a photo
@@ -177,7 +185,5 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
     }
     
-    
-
 }
 
