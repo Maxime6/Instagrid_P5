@@ -10,17 +10,18 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    let imagePicker = UIImagePickerController()
-    var imageTag: Int?
-    
-    var swipeGestureRecognizer: UISwipeGestureRecognizer?
-    
     @IBOutlet var layoutsButton: [UIButton]!
     @IBOutlet weak var topViewLeft: UIView!
     @IBOutlet weak var bottomViewLeft: UIView!
     @IBOutlet var addPhotoButtons: [UIButton]!
     @IBOutlet var photoImageViews: [UIImageView]!
     @IBOutlet weak var gridView: UIView!
+    
+    let imagePicker = UIImagePickerController()
+    var imageTag: Int?
+    let gridViewBackgroundColor = [UIColor.red, UIColor.lightGray, UIColor.purple, UIColor.cyan]
+    
+    var swipeGestureRecognizer: UISwipeGestureRecognizer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,21 +44,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         } else {
             print("set up swipe up")
             swipeGestureRecognizer?.direction = .up
-            
         }
     }
     
     // SwipeGesture Animations
     @objc func startAnimation() {
         if swipeGestureRecognizer?.direction == .left {
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: 0.4, animations: {
                 self.gridView.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
             }) { (_) in
                 self.shareGrid()
             }
         } else {
-            
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: 0.4, animations: {
                 self.gridView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
             }) { (_) in
                 self.shareGrid()
@@ -70,13 +69,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         guard let image = gridView.snapshot() else { return }
         let imageToShare = image
         let activityController = UIActivityViewController(activityItems: [imageToShare], applicationActivities: nil)
-        self.present(activityController, animated:  true, completion: nil)
-        
+        present(activityController, animated:  true, completion: nil)
+        activityController.completionWithItemsHandler = { _, _, _, _ in
+            self.animationsReturn()
+        }
     }
     
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    func animationsReturn() {
+        UIView.animate(withDuration: 0.5) {
+            self.gridView.transform = .identity
+        }
+    }
+
+    
+    // Changed background color of gridView
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            gridView.backgroundColor = UIColor.red
+            let currentColor = gridView.backgroundColor
+            var randomColor = gridViewBackgroundColor.randomElement()
+            if randomColor == currentColor {
+                randomColor = gridViewBackgroundColor.randomElement()
+            } else {
+                gridView.backgroundColor = randomColor
+            }
         }
     }
     
