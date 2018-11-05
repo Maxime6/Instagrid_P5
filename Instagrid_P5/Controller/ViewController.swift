@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    //======================
+    // MARK: - Outlets
+    //======================
     @IBOutlet var layoutsButton: [UIButton]!
     @IBOutlet weak var topViewLeft: UIView!
     @IBOutlet weak var bottomViewLeft: UIView!
@@ -17,11 +20,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet var photoImageViews: [UIImageView]!
     @IBOutlet weak var gridView: UIView!
     
+    //======================
+    // MARK: - Properties
+    //======================
     let imagePicker = UIImagePickerController()
     var imageTag: Int?
     let gridViewBackgroundColor = [UIColor.red, UIColor.lightGray, UIColor.purple, UIColor.cyan]
-    
     var swipeGestureRecognizer: UISwipeGestureRecognizer?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,15 +43,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         gridView.addGestureRecognizer(swipeGestureRecognizer)
     }
     
+    // Check the swipe direction
     @objc func setUpSwipeDirection() {
         if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
-            print("Set up swipe left")
             swipeGestureRecognizer?.direction = .left
         } else {
-            print("set up swipe up")
             swipeGestureRecognizer?.direction = .up
         }
     }
+    
+    //======================
+    // MARK: - Swipe and Share Grid
+    //======================
     
     // SwipeGesture Animations
     @objc func startAnimation() {
@@ -75,6 +84,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    // The animations when gridView return to center
     func animationsReturn() {
         UIView.animate(withDuration: 0.5) {
             self.gridView.transform = .identity
@@ -94,6 +104,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
     }
+    
+    //======================
+    // MARK: - Choose layout and photos
+    //======================
     
     // The layout selected when launching the app
     func layoutSelectedAtLaunch() {
@@ -130,17 +144,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
+    // Select new photo when user tap on a photo
     @objc func addNewPhoto(gesture: UITapGestureRecognizer) {
         imageTag = gesture.view?.tag
         openPhotoLibrary()
     }
     
+    // Open the photo library
     func openPhotoLibrary() {
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)
     }
     
+    // Place the selected photo in the view
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         guard let selectedImage = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) else { return }
@@ -155,6 +172,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
     }
     
+    // User can cancelled the action of selected a photo
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }

@@ -10,6 +10,7 @@ import UIKit
 
 extension UIView {
     
+    // Transform the gridView into an UIImage
     func snapshot() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
         drawHierarchy(in: bounds, afterScreenUpdates: true)
