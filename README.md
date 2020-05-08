@@ -1,4 +1,5 @@
-![](Documentation/Logo_Instagrid.png)
+<img src="Documentation/Logo_Instagrid.png" width="200" />
+
 
 # Instagrid
 
@@ -26,6 +27,5 @@ Disponible en mode portrait et en mode paysage.
 
 ### Screenshots
 
-![](Documentation/Instagrid_screen1.png)
-![](Documentation/Instagrid_screen2.png)
-![](Documentation/Instagrid_screen3.png)
+<img src="Documentation/Instagrid_screen1.png" width="300" />   <img src="Documentation/Instagrid_screen2.png" width="300" />
+<img src="Documentation/Instagrid_screen3.png" height="300" />
