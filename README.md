@@ -16,12 +16,16 @@ Disponible en mode portrait et en mode paysage.
 
 ### Compétences techniques
 
-Autolayout
-Vary for traits
-@IBOutlets / @IBActions
-DeviceOrientation
-UISwipeGestureRecognizer
-UIImagePickerController
-UIActivityViewController
+- Autolayout
+- Vary for traits
+- @IBOutlets / @IBActions
+- DeviceOrientation
+- UISwiperGestureRecognizer
+- UIImagePickerController
+- UIActivityController
 
+### Screenshots
 
+![](Documentation/Instagrid_screen1.png)
+![](Documentation/Instagrid_screen2.png)
+![](Documentation/Instagrid_screen3.png)
