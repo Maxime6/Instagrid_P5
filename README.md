@@ -11,7 +11,7 @@ Projet 4/12.
 
 ### Le projet
 
-Création de l'application Instagrid pour iPhone (design responsive).
+Création de l'application Instagrid pour iPhone(design responsive).
 Elle permet de combiner plusieurs photos dans un format carré et de partager le résultat avec ses amis.
 Disponible en mode portrait et en mode paysage.
 
